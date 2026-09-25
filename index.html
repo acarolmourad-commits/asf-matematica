@@ -11,6 +11,9 @@
 body{background:linear-gradient(160deg,#fff5ec,#ffe3f1 60%,#e0f7fa);min-height:100vh;color:#333}
 header{background:linear-gradient(90deg,var(--rosa),var(--roxo));color:#fff;padding:2rem 1rem;text-align:center}
 header h1{font-size:2rem} header p{opacity:.9;margin-top:.4rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;padding:.8rem;background:#fff;box-shadow:0 2px 8px #0001;position:sticky;top:0;z-index:10}
+nav a{background:var(--areia);border:1px solid #ffd3e6;color:#c2185b;padding:.3rem .7rem;border-radius:20px;font-size:.78rem;text-decoration:none}
+nav a:hover{background:var(--rosa);color:#fff}
 main{max-width:760px;margin:1.5rem auto;padding:0 1rem}
 .card{background:#fff;border-radius:16px;padding:1.4rem;box-shadow:0 4px 16px #7b2ff720;margin-bottom:1.2rem}
 .card h2{color:var(--roxo);margin-bottom:.6rem;font-size:1.2rem}
@@ -37,6 +40,19 @@ footer{text-align:center;padding:2rem;font-size:.8rem;color:#888}
 </head>
 <body>
 <header><h1>🔢 ASF Matemática do Surf</h1><p>Ondas, remada e prancha explicadas com números</p></header>
+<nav><a href="https://acarolmourad-commits.github.io/asf-app/">🏄‍♀️ ASF App</a>
+<a href="https://acarolmourad-commits.github.io/asf-app/guia-apps.html">🗺️ Guia de Apps</a>
+<a href="https://acarolmourad-commits.github.io/asf-praias/">Praias</a>
+<a href="https://acarolmourad-commits.github.io/asf-previsao/">Previsão</a>
+<a href="https://acarolmourad-commits.github.io/asf-volume/">Volume</a>
+<a href="https://acarolmourad-commits.github.io/asf-treino/">Treino</a>
+<a href="https://acarolmourad-commits.github.io/asf-eventos/">Eventos</a>
+<a href="https://acarolmourad-commits.github.io/asf-glossario/">Glossário</a>
+<a href="https://acarolmourad-commits.github.io/asf-seguranca/">Segurança</a>
+<a href="https://acarolmourad-commits.github.io/asf-comunidade/">Comunidade</a>
+<a href="https://acarolmourad-commits.github.io/asf-quiz/">Quiz</a>
+<a href="https://acarolmourad-commits.github.io/asf-ranking/">Ranking</a>
+<a href="https://acarolmourad-commits.github.io/asf-diario/">Diário</a></nav>
 <main>
 <div class="card"><h2>🌊 Velocidade da onda pelo período do swell</h2>
 <p style="font-size:.9rem;color:#667">Em águas profundas, a velocidade da onda é ≈ 1,56 × período (m/s). Quanto maior o período, mais rápida e energética a onda.</p>
@@ -65,7 +81,7 @@ function addXP(n){localStorage.setItem('asf_xp',XP()+n);document.getElementById(
 document.getElementById('xp').textContent=XP();
 function calcOnda(){const t=parseFloat(document.getElementById('per').value);if(!t)return;const v=1.56*t;const kh=(v*3.6).toFixed(1);document.getElementById('res1').textContent=`Velocidade ≈ ${v.toFixed(1)} m/s (${kh} km/h) em águas profundas 🌊`;addXP(5);}
 function calcRemada(){const b=parseFloat(document.getElementById('brac').value);if(!b)return;document.getElementById('res2').textContent=`Ritmo: ${(b*2).toFixed(0)} braçadas/minuto 💪`;addXP(5);}
-function calcPrancha(){const a=parseFloat(document.getElementById('alt').value);const f=parseFloat(document.getElementById('onda').value);if(!a)return;const cm=a+30+f;const pes=(cm/30.48).toFixed(1);document.getElementById('res3').textContent=`Prancha sugerida: ≈ ${cm.toFixed(0)} cm (${(cm/30.48).toFixed(1)} pés) 🏄‍♀️`;addXP(5);}
+function calcPrancha(){const a=parseFloat(document.getElementById('alt').value);const f=parseFloat(document.getElementById('onda').value);if(!a)return;const cm=a+30+f;document.getElementById('res3').textContent=`Prancha sugerida: ≈ ${cm.toFixed(0)} cm (${(cm/30.48).toFixed(1)} pés) 🏄‍♀️`;addXP(5);}
 </script>
 <script src="https://acarolmourad-commits.github.io/asf-app/asf-network.js" defer></script>
 </body>
