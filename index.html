@@ -22,6 +22,10 @@ button:hover{opacity:.85}
 input,select{padding:.5rem;border:1px solid #ddd;border-radius:10px;width:100%;margin:.3rem 0;font-size:1rem}
 .xp{position:fixed;bottom:1rem;right:1rem;background:#fff;border:2px solid var(--rosa);border-radius:24px;padding:.4rem 1rem;font-weight:bold;color:var(--roxo);box-shadow:0 4px 12px #0002}
 footer{text-align:center;padding:2rem;font-size:.8rem;color:#888}
+.howto{background:#f6f0ff;border-left:4px solid var(--roxo);border-radius:10px;padding:.7rem .9rem;margin:.7rem 0;font-size:.85rem;color:#54427a}
+.howto b{color:var(--roxo)}
+.exemplo{background:#eef9fb;border:1px dashed var(--mar);border-radius:10px;padding:.7rem .9rem;margin:.6rem 0;font-size:.85rem;color:#0a5a60}
+details{margin:.5rem 0}summary{cursor:pointer;font-weight:600;color:var(--roxo);font-size:.9rem}
 </style>
 <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-matematica/">
 <script type="application/ld+json">
@@ -44,21 +48,35 @@ footer{text-align:center;padding:2rem;font-size:.8rem;color:#888}
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643806355443576" crossorigin="anonymous"></script>
 </head>
 <body>
-<header><h1>🔢 A Matemática do Surf</h1><p>A física das ondas, da remada e das manobras — explicada com números</p></header>
+<header><h1>🔢 A Matemática do Surf</h1><p>A física das ondas, da remada e das manobras — explicada com números</p><p style="font-size:.85rem;margin-top:.5rem;opacity:.85">📚 Versão didática: cada calculadora tem guia de uso e exemplo resolvido</p></header>
 
 <main>
+<div class="card" style="border-left:5px solid var(--mar)"><h2>📚 Como usar esta página</h2>
+<p style="font-size:.9rem;color:#667">Cada calculadora abaixo responde uma pergunta prática do surf. O fluxo é sempre o mesmo:</p>
+<ol style="font-size:.9rem;color:#556;margin:.5rem 0 .5rem 1.2rem;line-height:1.7">
+<li><b>Meça ou estime</b> o dado pedido (na praia ou pela previsão do dia)</li>
+<li><b>Digite no campo</b> e clique no botão da calculadora</li>
+<li><b>Leia a interpretação</b> — o resultado sempre vem com o que fazer na prática 🌊</li>
+</ol>
+<p style="font-size:.85rem;color:#667">📱 <b>Dica:</b> os valores da previsão do dia (altura, período) você encontra no <a href="https://acarolmourad-commits.github.io/asf-previsao/">ASF Previsão</a>. Cada cálculo vale XP no seu ranking!</p></div>
 <div class="card"><h2>🌊 Velocidade da onda pelo período do swell</h2>
 <p style="font-size:.9rem;color:#667">Em águas profundas, a velocidade da onda é ≈ 1,56 × período (m/s). Quanto maior o período, mais rápida e energética a onda.</p>
+<details><summary>📖 O que é o "período" e onde acho esse número?</summary><div class="howto">O <b>período</b> é o tempo (em segundos) entre uma onda e a próxima da série. Você encontra em qualquer previsão de surf (ex.: "0,8 m @ 12s" = 12 segundos de período) — ou no <a href="https://acarolmourad-commits.github.io/asf-previsao/">ASF Previsão</a>.<br><b>Regra rápida:</b> &lt;8s = ondas fracas de vento · 10–12s = swell bom · 14s+ = swell forte de tempestade distante.</div></details>
+<details><summary>🧮 Exemplo resolvido</summary><div class="exemplo">Previsão diz 14s → digite 14 → resultado: ≈ 21,8 m/s (78 km/h). Por isso swell de período longo "empurra" muito mais!</div></details>
 <label>Período do swell (segundos)</label><input id="per" type="number" placeholder="12">
 <button onclick="calcOnda()">Calcular</button><h3 id="res1" style="margin-top:.8rem;color:var(--rosa)"></h3></div>
 
 <div class="card"><h2>🏄‍♀️ Ritmo de remada</h2>
 <p style="font-size:.9rem;color:#667">Meça quantas braçadas você dá em 30 segundos e descubra seu ritmo por minuto — útil para acompanhar o condicionamento.</p>
+<details><summary>📖 Como medir na prática?</summary><div class="howto">1) Peça para alguém na areia cronometrar 30 segundos (ou use um relógio à prova d'água).<br>2) Reme com esforço de "ir para o line-up" e conte cada braçada (braço direito + esquerdo = 2).<br>3) Digite o número aqui.<br><b>Referência:</b> iniciante ~20 · intermediária ~25 · avançada 30+ braçadas em 30s.</div></details>
+<details><summary>🧮 Exemplo resolvido</summary><div class="exemplo">Contei 23 braçadas → digito 23 → ritmo: 46 braçadas/min. Daqui a 1 mês de treino, meço de novo para ver a evolução 💪</div></details>
 <label>Braçadas em 30 segundos</label><input id="brac" type="number" placeholder="25">
 <button onclick="calcRemada()">Calcular</button><h3 id="res2" style="margin-top:.8rem;color:var(--rosa)"></h3></div>
 
 <div class="card"><h2>📏 Altura da onda × tamanho da prancha</h2>
 <p style="font-size:.9rem;color:#667">Regra prática para iniciantes: a prancha deve ser pelo menos 30 cm mais alta que você em ondas pequenas; em ondas maiores, pranchas maiores dão mais estabilidade.</p>
+<details><summary>📖 Quando usar esta conta?</summary><div class="howto">Use ao escolher sua primeira prancha ou alugar uma em viagem. É uma regra de <b>segurança para iniciantes</b> — prancha maior = mais estabilidade e remada fácil. Conforme evolui, o que manda é o <b>volume em litros</b>, não o tamanho (por isso linkamos o ASF Volume abaixo).</div></details>
+<details><summary>🧮 Exemplo resolvido</summary><div class="exemplo">Tenho 1,60 m e o mar está com 0,5 m → digito 160 e "Média" → prancha sugerida ≈ 205 cm (6'7"). Um funboard/softboard desse tamanho é perfeito para começar 🏄‍♀️</div></details>
 <label>Sua altura (cm)</label><input id="alt" type="number" placeholder="165">
 <label>Altura da onda</label><select id="onda"><option value="30">Pequena (até 0,5 m)</option><option value="15">Média (0,5–1 m)</option><option value="0">Grande (acima de 1 m)</option></select>
 <button onclick="calcPrancha()">Calcular</button><h3 id="res3" style="margin-top:.8rem;color:var(--rosa)"></h3>
@@ -67,12 +85,15 @@ footer{text-align:center;padding:2rem;font-size:.8rem;color:#888}
 
 <div class="card"><h2>🏄‍♀️ Velocidade de remada × velocidade da onda</h2>
 <p style="font-size:.9rem;color:#667">Para ser puxada pela onda, sua remada precisa <b>igualar a velocidade dela</b> no momento em que ela te alcança. Perto da arrebentação, a onda viaja a ≈ √(9,8 × profundidade) — e a profundidade onde ela quebra é ≈ 1,3 × a altura da onda.</p>
+<details><summary>📖 Como usar (passo a passo)</summary><div class="howto">1) Olhe a previsão ou observe o mar: estime a altura da onda em metros (na altura do seu peito? ≈ 0,8 m. Da sua altura? ≈ 1,6 m).<br>2) Escolha seu nível de remada (se fez a calculadora de ritmo acima, use como referência).<br>3) Clique em <b>Comparar</b>: o resultado diz se sua remada "fecha a conta" — e o que fazer se não fechar (remar antes, usar a descida da face, ou esperar a onda mais dentro).</div></details>
+<details><summary>🧮 Exemplo resolvido</summary><div class="exemplo">Onda de 0,8 m → quebra em ≈ 1,0 m de profundidade → viaja a ≈ 3,2 m/s (11,5 km/h). Remada intermediária = 2,0 m/s → diferença de 1,2 m/s → a calculadora diz: comece a remar ANTES e use a face a seu favor ⚠️</div></details>
 <label>Altura da onda (m)</label><input id="hOnda" type="number" step="0.1" placeholder="0.8">
 <label>Seu nível de remada</label><select id="nivelRemada"><option value="1.5">Iniciante (~1,5 m/s)</option><option value="2.0">Intermediária (~2,0 m/s)</option><option value="2.5">Avançada (~2,5 m/s)</option></select>
 <button onclick="calcRemadaVsOnda()">Comparar</button><h3 id="res4" style="margin-top:.8rem;color:var(--rosa)"></h3></div>
 
 <div class="card"><h2>🎯 Os pontos de pressão na parede da onda</h2>
 <p style="font-size:.9rem;color:#667">A água na face da onda não está parada — ela sobe em direção ao lábio. Isso cria <b>zonas de pressão diferentes</b>, e cada manobra tem seu ponto exato:</p>
+<details><summary>📖 Como ler o mapa abaixo?</summary><div class="howto">Imagine a parede da onda dividida em 3 faixas horizontais, como um semáforo vertical: <b>base</b> (embaixo), <b>meio</b> e <b>lábio</b> (topo). Quanto mais alto, mais energia — a água sobe acelerando até quebrar. Cada faixa abaixo diz <b>qual manobra</b> nasce ali e por quê. Leia de baixo para cima: toda manobra começa na base (bottom turn) e "visita" as outras zonas.</div></details>
 <div style="margin:.8rem 0;border-radius:12px;overflow:hidden;border:1px solid #eee">
 <div style="background:linear-gradient(180deg,#7b2ff7,#b388ff);color:#fff;padding:.7rem .9rem"><b>🔝 Terço superior (perto do lábio)</b><br><small>Máxima pressão e energia — a água aqui está acelerando para quebrar. É o ponto do <b>top turn</b> e da <b>rebatida (reentry)</b>: a prancha recebe o maior retorno de força, então a manobra é mais radical e projetada.</small></div>
 <div style="background:linear-gradient(180deg,#00c2cb,#7be3ea);color:#083;padding:.7rem .9rem"><b>↔️ Terço médio (meio da parede)</b><br><small>Pressão moderada e face mais limpa — ideal para gerar <b>velocidade</b> (pumping) e para o <b>cutback</b>, voltando em direção à fonte de energia.</small></div>
@@ -83,6 +104,8 @@ footer{text-align:center;padding:2rem;font-size:.8rem;color:#888}
 
 <div class="card"><h2>📐 Ângulo de takeoff</h2>
 <p style="font-size:.9rem;color:#667">Dropar reto demais = prancha apracha e você perde a onda (ou o bico afunda). Dropar muito angulado = a onda passa sem você. O ângulo ideal entre a prancha e a crista da onda costuma ficar entre <b>30° e 45°</b>.</p>
+<details><summary>📖 Como usar (passo a passo)</summary><div class="howto">1) Use o resultado da calculadora "Remada × Onda" acima: copie a velocidade da onda (m/s) para o primeiro campo.<br>2) No segundo campo, sua velocidade de remada (1,5 / 2,0 / 2,5 conforme seu nível).<br>3) O resultado é o <b>ângulo mínimo</b>: quanto você precisa apontar a prancha na direção da quebra para compensar a diferença de velocidade. Matematicamente, é o componente da sua remada que "soma" com a direção da onda (trigonometria: sen θ = v_remada / v_onda).</div></details>
+<details><summary>🧮 Exemplo resolvido</summary><div class="exemplo">Onda a 3,2 m/s, remada a 2,0 m/s → ângulo mínimo ≈ 51° em relação à crista. Ou seja: com essa diferença, é melhor dropar bem angulada. Se sua remada fosse 2,8 m/s → ≈ 29°, takeoff quase reto funciona 📐</div></details>
 <label>Velocidade da onda na arrebentação (m/s) — use a calculadora acima</label><input id="vOnda" type="number" step="0.1" placeholder="3.2">
 <label>Sua velocidade de remada (m/s)</label><input id="vRemada" type="number" step="0.1" placeholder="2.0">
 <button onclick="calcAngulo()">Calcular ângulo mínimo</button><h3 id="res5" style="margin-top:.8rem;color:var(--rosa)"></h3></div>
