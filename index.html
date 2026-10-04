@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ASF Matemática do Surf — ASF</title>
-<meta name="description" content="Calculadoras de matemática do surf: velocidade da onda pelo período do swell, ritmo de remada e relação entre tamanho da onda e prancha.">
+<meta name="description" content="Matemática do surf explicada: remada × velocidade da onda, pontos exatos de pressão na parede para cada manobra, velocidade da onda pelo período e tamanho de prancha.">
 <style>
 :root{--rosa:#ff4d8d;--roxo:#7b2ff7;--areia:#fff5ec;--mar:#00c2cb}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
@@ -64,6 +64,27 @@ footer{text-align:center;padding:2rem;font-size:.8rem;color:#888}
 <button onclick="calcPrancha()">Calcular</button><h3 id="res3" style="margin-top:.8rem;color:var(--rosa)"></h3>
 <p style="font-size:.8rem;color:#888;margin-top:.5rem">Para o cálculo completo de volume (litragem) por peso e nível, use o <a href="https://acarolmourad-commits.github.io/asf-volume/">ASF Volume</a>.</p></div>
 
+
+<div class="card"><h2>🏊‍♀️ Remada × Velocidade da Onda — você consegue pegar essa onda?</h2>
+<p style="font-size:.9rem;color:#667">Para ser pega pela onda, sua remada precisa atingir cerca de <b>70–80% da velocidade dela</b>. Compare: a onda viaja a ≈ 1,56 × período (m/s); sua remada depende do ritmo de braçadas × distância por braçada (≈ 1 m).</p>
+<label>Período do swell (s)</label><input id="per2" type="number" placeholder="10">
+<label>Braçadas em 30 segundos</label><input id="brac2" type="number" placeholder="28">
+<button onclick="calcMatch()">Comparar</button><h3 id="res4" style="margin-top:.8rem;color:var(--rosa)"></h3>
+<p style="font-size:.8rem;color:#888;margin-top:.5rem">Dica: ondas de período longo (14s+) correm a +85 km/h em águas profundas — por isso o <b>posicionamento</b> vale mais que força: entrar no pico certo reduz a velocidade que você precisa.</p></div>
+
+<div class="card"><h2>📐 Matemática das Manobras — os pontos exatos de pressão na parede</h2>
+<p style="font-size:.9rem;color:#667">A parede da onda não é uniforme: a <b>pressão (energia)</b> varia por faixa vertical. Escolha a manobra e veja o ponto exato:</p>
+<label>Manobra</label><select id="man">
+<option value="bottom">Bottom turn</option>
+<option value="cutback">Cutback</option>
+<option value="snap">Snap (batida no lábio)</option>
+<option value="floater">Floater</option>
+<option value="aereo">Aéreo</option>
+</select>
+<button onclick="calcManobra()">Onde executar?</button>
+<div id="res5" style="margin-top:.8rem"></div>
+<p style="font-size:.8rem;color:#888;margin-top:.6rem"><b>Por trás dos números:</b> na base da onda (0–30% da altura) a água sobe com máxima energia — é a "power zone", onde o bottom turn converte velocidade em subida (v ≈ √(g·h), quanto mais alta a onda, mais rápido você sai da base). No terço médio (30–70%) a parede é estável — ideal para mudanças de direção longas. No lábio (70–100%) a onda está quebrando: pressão para baixo e projeção — o ponto dos snaps e aéreos.</p></div>
+
 <div class="card"><h2>🌐 Ecossistema ASF</h2><p>Este app faz parte da constelação ASF — Associação de Surf Feminino. Ganhe XP aqui e veja seu progresso no <a href="https://acarolmourad-commits.github.io/asf-ranking/">ASF Ranking</a>. Todos os apps: <a href="https://acarolmourad-commits.github.io/asf-app/guia-apps.html">Guia de Apps ASF</a>.</p></div>
 </main>
 <div class="xp">⚡ XP: <span id="xp">0</span></div>
@@ -74,6 +95,21 @@ function addXP(n){localStorage.setItem('asf_xp',XP()+n);document.getElementById(
 document.getElementById('xp').textContent=XP();
 function calcOnda(){const t=parseFloat(document.getElementById('per').value);if(!t)return;const v=1.56*t;const kh=(v*3.6).toFixed(1);document.getElementById('res1').textContent=`Velocidade ≈ ${v.toFixed(1)} m/s (${kh} km/h) em águas profundas 🌊`;addXP(5);}
 function calcRemada(){const b=parseFloat(document.getElementById('brac').value);if(!b)return;document.getElementById('res2').textContent=`Ritmo: ${(b*2).toFixed(0)} braçadas/minuto 💪`;addXP(5);}
+
+function calcMatch(){const T=parseFloat(document.getElementById('per2').value),b=parseFloat(document.getElementById('brac2').value);if(!T||!b)return;
+const vOnda=1.56*T;const vRem=(b*2)*1.0/60;const pct=vRem/vOnda*100;
+let msg;if(pct>=75){msg=`✅ Sim! Sua remada (${vRem.toFixed(1)} m/s) cobre ${pct.toFixed(0)}% da velocidade da onda (${vOnda.toFixed(1)} m/s).`;}
+else if(pct>=55){msg=`⚠️ No limite: ${pct.toFixed(0)}% da velocidade da onda. Posicione-se mais no pico e reme na diagonal para compensar.`;}
+else{msg=`❌ Difícil: a onda corre a ${(vOnda*3.6).toFixed(0)} km/h e sua remada dá ${(vRem*3.6).toFixed(1)} km/h (${pct.toFixed(0)}%). Espere a onda encostar na bancada (ela desacelera) ou melhore o ritmo de remada.`;}
+document.getElementById('res4').textContent=msg;addXP(5);}
+const MANOBRAS={
+bottom:{p:'0–30% da parede (base)',t:'A <b>power zone</b>: máxima pressão da água subindo. Entre com velocidade, flexione as pernas e incline a borda ≈ 45° — a base devolve essa pressão como projeção para cima. É o alicerce de todas as outras manobras.'},
+cutback:{p:'30–60% da parede (terço médio)',t:'Zona de parede estável e aberta. Você desce da crista em arco amplo (raio grande = menos perda de velocidade) até a espuma, usando a parte plana da onda para redirecionar 180° de volta ao pico.'},
+snap:{p:'70–100% da parede (lábio)',t:'O lábio concentra a energia da quebra apontando para baixo/frente. O snap usa o top ≈ últimos 20% da parede: suba vertical pela power zone e gire no lábio, que devolve a prancha com pressão descendente.'},
+floater:{p:'90–100% (cima do lábio/espuma)',t:'Você "flutua" sobre a seção quebrada: sem pressão de parede, vale a conservação de velocidade — entre rápido (vindo do bottom) e reentre com o peso à frente para não afundar o nose na espuma.'},
+aereo:{p:'70–90% (transição parede→lábio)',t:'O lábio funciona como rampa: a parede em 60–80° projeta a prancha. A velocidade de saída da power zone (v ≈ √(g·h)) define a altura do voo — onda mais alta = projeção maior.'}};
+function calcManobra(){const k=document.getElementById('man').value;const m=MANOBRAS[k];
+document.getElementById('res5').innerHTML=`<h3 style="color:var(--rosa)">📍 Ponto exato: ${m.p}</h3><p style="font-size:.9rem;color:#556;margin-top:.4rem">${m.t}</p>`;addXP(5);}
 function calcPrancha(){const a=parseFloat(document.getElementById('alt').value);const f=parseFloat(document.getElementById('onda').value);if(!a)return;const cm=a+30+f;document.getElementById('res3').textContent=`Prancha sugerida: ≈ ${cm.toFixed(0)} cm (${(cm/30.48).toFixed(1)} pés) 🏄‍♀️`;addXP(5);}
 </script>
 <script src="https://acarolmourad-commits.github.io/asf-app/asf-network.js" defer></script>
